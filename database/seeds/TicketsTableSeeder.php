@@ -11,6 +11,6 @@ class TicketsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Ticket::class, 2)->create();
+        factory(App\Ticket::class, 23)->create();
     }
 }
