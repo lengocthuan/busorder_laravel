@@ -17,7 +17,7 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'userName', 'email', 'passWord', 'confirmpassword',
     ];
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'passWord', 'remember_token', 'confirmpassword',
     ];
 
     /**
@@ -43,4 +43,8 @@ class User extends Authenticatable
     return $this->hasMany('App\RoleUser', 'role_users', 'user_id','role_id');
     }
     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['passWord'] = MD5($password);
+    }
 }

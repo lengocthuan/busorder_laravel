@@ -1,46 +1,56 @@
-@extends('front_layout')
-@section('registration_form')
-
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-offset-3 col-lg-6">
-
-				@if ( count($errors) > 0 )
-					@foreach ( $errors->all() as $error ) 
-						<p class="alert alert-danger">{{ $error }}</p>
-					@endforeach
-				@endif
-
-				<form method="post" action="{{ route('register') }}">
-					{{ csrf_field() }}
-					<fieldset>
-						<legend>Registration Form</legend>
-						<div class="form-group">
-						  	<label for="exampleInputEmail1">First Name</label>
-						  	<input name="fname" value="{{ old('fname') }}" class="form-control" aria-describedby="emailHelp" placeholder="Enter first name" type="text">
-						</div>
-						<div class="form-group">
-						  	<label for="exampleInputEmail1">Last Name</label>
-						  	<input name="lname" value="{{ old('lname') }}" class="form-control" aria-describedby="emailHelp" placeholder="Enter last name" type="text">
-						</div>
-						<div class="form-group">
-						  	<label for="exampleInputEmail1">Email address</label>
-						  	<input name="email" value="{{ old('email') }}" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" type="email">
-						</div>
-						<div class="form-group">
-						  	<label for="exampleInputPassword1">Password</label>
-						  	<input name="password" class="form-control" placeholder="Password" type="password">
-						</div>
-						<div class="form-group">
-						  	<label for="exampleInputPassword1">Confirm Password</label>
-						  	<input name="password_confirmation" class="form-control" placeholder="Confirm Password" type="password">
-						</div>
-						<button type="reset" class="btn btn-default">Reset</button>
-						<button type="submit" class="btn btn-primary">Register</button>
-					</fieldset>
-				</form>
-			</div>
-		</div>
-	</div>
-
+	@extends('front_layout')
+	@section('registration')
+	 <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Register</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                	@include('errors')
+                	@if(session()->has('alert-success'))
+		                <div class ="row">
+		                	<div class = "alert alert-success">
+		                		<button type = "button" class = "close" data-dismiss = "alert" aria-hidden = "true">&times;</button>
+		                		<strong>Notification</strong> {{ session() -> get('alert-success') }}
+		                	</div>
+		                </div>
+					@endif
+                    <form action="/register" method="POST">
+                        {{ csrf_field() }}
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Username</label>
+                                <input type="text" class="form-control border" placeholder=" " name="userName" id="recipient-rname" required="">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-email" class="col-form-label">Email</label>
+                                <input type="email" class="form-control border" placeholder=" " name="email" id="recipient-email" required="">
+                            </div>
+                            <div class="form-group">
+                                <label for="password1" class="col-form-label">Password</label>
+                                <input type="password" class="form-control border" placeholder=" " name="passWord" id="password1" required="">
+                            </div>
+                            <div class="form-group">
+                                <label for="password2" class="col-form-label">Confirm Password</label>
+                                <input type="password" class="form-control border" placeholder=" " name="passWord_confirmation" id="password2" required="">
+                            </div>
+                            <div class="sub-w3l">
+                                <div class="sub-agile">
+                                    <input type="checkbox" id="brand2" required="">
+                                    <label for="brand2" class="mb-3">
+                                        <span></span>I Accept to the Terms & Conditions</label>
+                                </div>
+                            </div>
+                            <div class="right-w3l">
+                                {!! Form::submit(trans('message.register'), ['class' => 'form-control btn-theme text-white']) !!}
+                                {!! Form::close() !!}
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
 @endsection

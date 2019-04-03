@@ -14,3 +14,25 @@
 Route::get('/', function () {
     return view('welcome_content');
 });
+
+Route::get('/aboutus', function () {
+    return view('termsconditions');
+});
+
+// Route::get('/registration', function () {
+//     return view('registration');
+// });
+
+Route::get('login', function () {
+    return view('login');
+});
+
+Route::get('registration', function () {
+    return view('registration');
+});
+
+
+Route::get('/register', 'RegistrationController@create');
+
+Route::post('/register', 'RegistrationController@store');
+
