@@ -27,11 +27,13 @@
 </head>
     <body>
         @include('front_header')
-            @yield('tc')
             @yield('welcome')
             @yield('notification')
             @yield('login')
             @yield('registration')
+            @yield('tc')
+            @yield('ddlist')
+            @yield('login-adform')
         @include('front_footer')
     </body>
 </html>

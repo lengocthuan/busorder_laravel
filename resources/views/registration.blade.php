@@ -23,19 +23,19 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Username</label>
-                                <input type="text" class="form-control border" placeholder=" " name="userName" id="recipient-rname" required="">
+                                <input type="text" class="form-control border" placeholder=" " name="username" id="recipient-rname" required="">
                             </div>
                             <div class="form-group">
                                 <label for="recipient-email" class="col-form-label">Email</label>
-                                <input type="email" class="form-control border" placeholder=" " name="email" id="recipient-email" required="">
+                                <input type="email" class="form-control border" placeholder=" " name="email" id="email123" required="" value="">
                             </div>
                             <div class="form-group">
                                 <label for="password1" class="col-form-label">Password</label>
-                                <input type="password" class="form-control border" placeholder=" " name="passWord" id="password1" required="">
+                                <input type="password" class="form-control border" placeholder=" " name="password" id="password1" required="">
                             </div>
                             <div class="form-group">
                                 <label for="password2" class="col-form-label">Confirm Password</label>
-                                <input type="password" class="form-control border" placeholder=" " name="passWord_confirmation" id="password2" required="">
+                                <input type="password" class="form-control border" placeholder=" " name="password_confirmation" id="password2" required="">
                             </div>
                             <div class="sub-w3l">
                                 <div class="sub-agile">
@@ -53,4 +53,20 @@
                 </div>
             </div>
         </div>
+
+        {{-- show a message when email or username has exist in system; --}}
+        <script type="text/javascript">
+                $( document ).ready(function() {
+                    $('#email123').blur(function()
+                    {
+                        var email = $(this).val();
+                        $.get('unique/' + email, function(data) {
+                            if (data == "1" )
+                            {
+                                alert('email has exist in our system, please try again with another email or you can press "Forget password"');
+                            }
+                        });
+                    });
+                });
+        </script>
 @endsection

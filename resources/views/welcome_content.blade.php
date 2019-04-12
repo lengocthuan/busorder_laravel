@@ -18,20 +18,32 @@
                         <div class="form-header">
                             <h1>Make your reservation</h1>
                         </div>
-                        <form>
+                        <form action="/" method="get">
+                            {{ csrf_field() }}
+                            @include('errors')
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Starting City" required>
+                                        <select name="start" class="form-control" id="start" required>
+                                            <option value="">-- Select Starting Point --</option>
+                                            @foreach ($names as $name)
+                                                <option value="{{ $name->id }}">{{ ucfirst($name->name) }}</option>
+                                            @endforeach
+                                        </select>
                                         <span class="form-label">Starting Point</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="End City" required>
+                                        <select name="end" class="form-control" id="end" required>
+                                            <option value="">-- Select Destination --</option>
+                                            @foreach ($names as $name)
+                                                <option value="{{ $name->id }}">{{ ucfirst($name->name) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                         <span class="form-label">Destination</span>
                                     </div>
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">

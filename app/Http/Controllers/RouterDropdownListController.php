@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\BusRouter;
+use App\Location;
 use Illuminate\Http\Request;
 
-class RegistrationController extends Controller
+class RouterDropdownListController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-        //
+        $names = Location::all();
+        return view('welcome_content', compact('names'));
     }
 
     /**
@@ -24,7 +26,7 @@ class RegistrationController extends Controller
      */
     public function create()
     {
-        return view('registration');
+        //
     }
 
     /**
@@ -35,31 +37,24 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validate(request(), [
-            'username' => 'required|max:15|unique:users,username',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:6',
-        ],
-        [
-            'email.unique' => 'The email already exists in the system.',
-        ]);
-
-        $user = new User;
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
-
-        // auth()->login($user);
-
-        session()->flash('alert-success', 'Your account has been successfully added to our system.');
-
-        // return redirect()->to('/registration');
-        return redirect('registration');
-        
+        //
     }
+    public function test()
+    {   //get destination and starting point from locations;
+        $bus = BusRouter::where('destination', 29)->get();
 
+        // dd($bus);
+        $location = Location::all();
+        foreach ($bus as $b) {
+
+            foreach ($location as $l) {
+
+                if ($l->id == $b->starting_point) {
+                    echo $l->name;
+                }
+            }
+        }
+    }
     /**
      * Display the specified resource.
      *
@@ -89,10 +84,9 @@ class RegistrationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request, $id)
     {
-        // $email = User::where('email', $key)->get();
-        // return count($email)
+        //
     }
 
     /**
@@ -104,11 +98,5 @@ class RegistrationController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function unique($email)
-    {
-        $check = User::where('email', $email)->get();
-        echo $check->count();
     }
 }

@@ -14,7 +14,7 @@ class AlterBusRoutersTable extends Migration
     public function up()
     {
         Schema::table('bus_routers', function (Blueprint $table) {
-            $table->bigInteger( 'starting_point' )->unsigned();            
+            $table->bigInteger( 'starting_point' )->unsigned();
             $table->bigInteger( 'destination' )->unsigned();
         });
         Schema::table('bus_routers', function (Blueprint $table) {

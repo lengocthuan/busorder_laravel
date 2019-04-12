@@ -1,5 +1,5 @@
-@extends('front_layout')
-@section('login')
+	@extends('front_layout')
+	@section('login')
 	<div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -10,18 +10,19 @@
                 </div>
                 <div class="modal-body">
                 	@include('errors')
-                    <form action="/login" method="POST" role="form">
-                    	{{ csrf_field() }}
+                    <form action="/login" method="post" >
+                    	<input type="hidden" name="_token" value="{{csrf_token()}}">
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Username</label>
-                            <input type="text" class="form-control border" placeholder=" " name="Name" id="recipient-name" required="">
-                        </div>
+                                <label for="recipient-email" class="col-form-label">Email</label>
+                                <input type="email" class="form-control border" placeholder=" " name="email" id="email123" required="" >
+                            </div>
                         <div class="form-group">
                             <label for="password" class="col-form-label">Password</label>
-                            <input type="password" class="form-control border" placeholder=" " name="Password" id="password" required="">
+                            <input type="password" class="form-control border" placeholder=" " name="password" id="password" required="">
                         </div>
                         <div class="right-w3l">
-                            <input type="submit" class="form-control border text-white btn-theme" value="Login">
+                                {!! Form::submit(trans('message.login'), ['class' => 'form-control btn-theme text-white']) !!}
+                                {!! Form::close() !!}
                         </div>
                         <div class="row sub-w3l my-3">
                             <div class="col sub-agile">

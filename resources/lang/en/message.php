@@ -19,5 +19,6 @@ return [
     'edit' => 'Update',
     'description' => 'Describe',
     'descript' => 'Describe',
-    'register' => 'Register'
+    'register' => 'Register',
+    'login' => 'Login'
 ];

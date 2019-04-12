@@ -1,5 +1,5 @@
-@extends('admin.admin-layout')
-@section('admin-bus-list')
+@extends('users/admins/admin_layout')
+@section('admin_detail_loc')
 <div class="container">
   <div class="row">
     
@@ -10,7 +10,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad">
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h3 class="panel-title">Bus List</h3>
+          <h3 class="panel-title">Bus Location</h3>
         </div>
         <div class="panel-body">
         <div class="row">
@@ -22,38 +22,33 @@
               <table class="table table-user-information">
                 <tbody>
                   <tr>
-                    <th>Bus ID</th>
-                    <th>Bus Name</th>
-                    <th>Bus Total Seat</th>
-                    <th>Bus Created Date</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
                     <th>Action</th>
                   </tr>
-                  @if ( count($bus_info) > 0 )
-                    @foreach ( $bus_info as $data )
                       <tr>
-                        <td>{{ $data->id }}</td>
-                        <td>{{ $data->bus_name }}</td>
-                        <td>{{ $data->total_seat }}</td>
-                        <td>{{ $data->created_at }}</td>
+                        <td>{{ $detail->id }}</td>
+                        <td>{{ $detail->name }}</td>
+                        <td>{{ $detail->description }}</td>
                         <td>
-                          <form action="{{ '/admin/delete-bus/' . $data->id }}" method="post">
+                          <form action="{{ '/admin/deletelocs/' . $detail->id }}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <input type="submit" name="submit" value="Delete" class="btn btn-sm btn-danger" />
+                            <input type="submit" name="submit" value="Delete" class="btn btn-danger" />
                           </form>
                         </td>
                       </tr>
-                    @endforeach
-                  @endif 
                 </tbody>
               </table>
             </div>
           </div>
         </div>
         <div class="panel-footer">
-          <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+          <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
           <span class="pull-right">
-            <a href="{{ url('admin/add-bus') }}" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-plus"></i> Add Bus</a>
+            <a href="{{ url('admin/routerlist') }}" data-toggle="tooltip" type="button" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+            <a href="{{ url('admin/add-bus') }}" data-toggle="tooltip" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add Locations</a>
           </span>
         </div>
       </div>

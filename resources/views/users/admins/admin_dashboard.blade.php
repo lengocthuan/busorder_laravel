@@ -1,10 +1,10 @@
-@extends('admin.admin-layout')
-@section('admin-dashboard')
+@extends('users/admins/admin_layout')
+@section('admin_dashboard')
 <div class="container">
   <div class="row">
     
     <div class="col-md-5 toppad pull-right col-md-offset-3">
-      <a href="{{ url('edit-profile-form') }}">Edit Profile</a>
+      <a href="{{ url('users/customers/edit-profile-form') }}">Edit Profile</a>
       <br>
       <p class="text-info">Today is: {{ date('d-m-Y', time()) }}</p>
     </div>
@@ -12,17 +12,16 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h3 class="panel-title">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</h3>
+          <h3 class="panel-title">{{ Auth::user()->username }}</h3>
         </div>
         <div class="panel-body">
         <div class="row">
           <div class="col-md-3 col-lg-3" align="center">
-              <img alt="User Pic" src="/images/pp.png" class="img-circle img-responsive">
+              <img alt="User Pic" src="http://lorempixel.com/g/800/600/transport/" class="img-circle img-responsive">
           </div>
             <div class="col-md-12 col-lg-12"> 
               <table class="table table-user-information">
                 <tbody>
-                  
                 </tbody>
               </table>
               

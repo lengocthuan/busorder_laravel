@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Session;
 
-class RegistrationController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +25,12 @@ class RegistrationController extends Controller
      */
     public function create()
     {
-        return view('registration');
+        if (Auth::check()) {
+            return redirect('/');
+        } else {
+            return view('login');
+        }
+
     }
 
     /**
@@ -33,31 +39,21 @@ class RegistrationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function login(Request $request)
     {
 
-        $this->validate(request(), [
-            'username' => 'required|max:15|unique:users,username',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:6',
-        ],
-        [
-            'email.unique' => 'The email already exists in the system.',
-        ]);
+        $email = $request->input('email');
+        $pass = $request->input('password');
 
-        $user = new User;
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
+        if (Auth::attempt(['email' => $email, 'password' => $pass])) {
+            session()->flash('alert-success', 'Login successful');
+            return redirect('/');
+        } else {
+            return back()->withErrors([
+                'message' => 'The email or password is incorrect, please try again',
+            ]);
+        }
 
-        // auth()->login($user);
-
-        session()->flash('alert-success', 'Your account has been successfully added to our system.');
-
-        // return redirect()->to('/registration');
-        return redirect('registration');
-        
     }
 
     /**
@@ -89,10 +85,9 @@ class RegistrationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request, $id)
     {
-        // $email = User::where('email', $key)->get();
-        // return count($email)
+        //
     }
 
     /**
@@ -101,14 +96,9 @@ class RegistrationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
-    }
-
-    public function unique($email)
-    {
-        $check = User::where('email', $email)->get();
-        echo $check->count();
+        Auth::logout();
+        return redirect('/');
     }
 }

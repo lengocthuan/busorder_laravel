@@ -8,8 +8,9 @@ class Role extends Model
 {
     protected $table = 'roles';
 
-    /*public function users()
+    public function users()
     {
-        return $this->hasMany('App\RoleUser', 'role_users', 'role_id', 'user_id');
-    }*/
+        //return $this->hasMany('App\RoleUser', 'role_users', 'role_id', 'user_id');
+        // return $this->hasMany('App\RoleUser', 'role_id', 'id');
+    }
 }
