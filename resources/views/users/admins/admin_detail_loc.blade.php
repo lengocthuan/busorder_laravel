@@ -4,7 +4,7 @@
   <div class="row">
     
     <div class="col-md-12 toppad pull-right">
-      <p class="text-info">Today is: {{ date('d-m-Y', time()) }}</p>
+      <p class="text-info">Today is: {{ date('d-m-Y H:i:s', time()) }}</p>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad">

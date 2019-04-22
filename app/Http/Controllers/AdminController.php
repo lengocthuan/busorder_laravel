@@ -18,10 +18,14 @@ class AdminController extends Controller
     // {
     //     $this->middleware('adminauth');
     // }
-
     public function index()
     {
-        return view('users/admins/admin_dashboard');
+        if (Auth::check()) {
+            return view('users/admins/admin_dashboard');
+        } else {
+            return view('users/admins/admin_login');
+        }
+        
     }
 
     /**
@@ -94,11 +98,11 @@ class AdminController extends Controller
 
     public function adloginform()
     {
-        if (Auth::check()) {
-            return redirect()->action('AdminController@index');
-        } else {
+        // if (Auth::check()) {
+        //     return redirect()->action('AdminController@destroy');
+        // } else {
             return view('users/admins/admin_login');
-        }
+        // }
         
     }
 

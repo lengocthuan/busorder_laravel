@@ -12,25 +12,29 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
+                        <a class="nav-link" href="{{ url('/') }}">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About us</a>
+                        <a class="nav-link" href="{{ url('/aboutus') }}">About us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#">Feedback and Rating</a>
                     </li>
                     @if( Auth::check() )
                         <li class="menu-item has-sub-menu">
                             <a href= "#"><button type="button" class="btn w3ls-btn">Hi, {{ Auth::user()->username }}</button></a>
                                 <ul class="sub-menu">
                                     <li class="menu-item">
-                                        <a class="item-link" href="#"><button type="button" class="btn w3ls-btn">My profile</button></a>
+                                        <a class="item-link" href="{{ url('/updateinfo/'. Auth::user()->id) }}"><button type="button" class="btn w3ls-btn">Your profile</button></a>{{-- 
+                                        <form action="{{url ('/updateinfo/'. Auth::user()->id) }}" method ="get">
+                                            {{ csrf_field() }}
+                                            <button type="submit" name="submit" class="btn w3ls-btn" class="item-link">Your profile</button>
+                                        </form> --}}
                                     </li>
                                     <li class="menu-item">
                                         <a class="item-link" href= "{{ url ('/logout') }}"><button type="button" class="btn w3ls-btn">Logout</button></a>
@@ -39,7 +43,7 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a href= "/login">
+                            <a href= "{{ url('/login') }}">
                                 <button type="button" class="btn w3ls-btn">Login</button>
                             </a>
                         </li>

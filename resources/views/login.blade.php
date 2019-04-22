@@ -10,6 +10,9 @@
                 </div>
                 <div class="modal-body">
                 	@include('errors')
+                    @if(session('error'))
+                        <p class="alert alert-info">{{ session::get('error') }}</p>
+                    @endif
                     <form action="/login" method="post" >
                     	<input type="hidden" name="_token" value="{{csrf_token()}}">
                         <div class="form-group">
@@ -35,7 +38,7 @@
                             </div>
                         </div>
                         <p class="text-center">Don't have an account?
-                            <a href="registration" class="text-secondary font-weight-bold">
+                            <a href="{{ url('/registration') }}" class="text-secondary font-weight-bold">
                                 Register Now</a>
                         </p>
                     </form>

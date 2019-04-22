@@ -26,7 +26,7 @@ class LoginController extends Controller
     public function create()
     {
         if (Auth::check()) {
-            return redirect('/');
+            return redirect()->action('LoginController@destroy');
         } else {
             return view('login');
         }
@@ -45,7 +45,7 @@ class LoginController extends Controller
         $email = $request->input('email');
         $pass = $request->input('password');
 
-        if (Auth::attempt(['email' => $email, 'password' => $pass])) {
+        if (Auth::attempt(['email' => $email, 'password' => $pass, 'role_id' => '0'])) {
             session()->flash('alert-success', 'Login successful');
             return redirect('/');
         } else {

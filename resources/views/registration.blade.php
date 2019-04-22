@@ -41,7 +41,7 @@
                                 <div class="sub-agile">
                                     <input type="checkbox" id="brand2" required="">
                                     <label for="brand2" class="mb-3">
-                                        <span></span>I Accept to the Terms & Conditions</label>
+                                        <span></span><a href="{{ url('/aboutus') }}">I Accept to the Terms & Conditions</a></label>
                                 </div>
                             </div>
                             <div class="right-w3l">

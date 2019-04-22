@@ -6,14 +6,14 @@
         <ul class="nav navbar-nav navbar-right">
         	@if ( Auth::check() )
             <li class="menu-item has-sub-menu"><a href="{{ url('/admin/routerlist') }}"><span class="glyphicon glyphicon-list"></span> Bus list</a></li>
-            <li class="menu-item has-sub-menu"><a href="{{ url('/bookingform') }}"><span class="glyphicon glyphicon-calendar"></span> Booking now</a></li>
+            <li class="menu-item has-sub-menu"><a href="{{ url('/') }}"><span class="glyphicon glyphicon-calendar"></span> Booking now</a></li>
             <li class="menu-item has-sub-menu"><a href=""><i class="fas fa-expand-arrows-alt"></i> Expand</a>
                 <ul class="nav nav-custom" >
                     <li >
                          <a href="#"><i class="fas fa-location-arrow"></i> LOCATION</a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="admin/theloai/danhsach">List</a>
+                                        <a href="{{ url('admin/locslist') }}">List</a>
                                     </li>
                                     <li>
                                         <a href="admin/theloai/them">Add</a>

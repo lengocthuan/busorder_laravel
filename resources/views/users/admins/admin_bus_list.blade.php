@@ -4,7 +4,7 @@
   <div class="row">
     
     <div class="col-md-12 toppad pull-right">
-      <p class="text-info">Today is: {{ date('d-m-Y', time()) }}</p>
+      <p class="text-info">Today is: {{ date('d-m-Y H:i:s', time()) }}</p>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad">
@@ -16,8 +16,9 @@
         <div class="row">
           @if ( Session::has('msg') )
             <p class="alert alert-info">{{ Session::get('msg') }}</p>
+            @elseif(session('success'))
+            <p class="alert alert-info">{{ Session::get('success') }}</p>
           @endif
-
           <div class="col-md-12 col-lg-12">
               <table class="table table-user-information">
                 <tbody>
@@ -27,7 +28,7 @@
                     <th>Description</th>
                     <th>Starting_Point</th>
                     <th>Destination</th>
-                    <th>Update_At</th>
+                    <th>Update_at</th>
                     <th>Action</th>
                   </tr>
                   @if ( count($bus))
@@ -40,10 +41,9 @@
                         <td style="text-align: center;"><form action="{{url( 'admin/locslist2/'. $data->destination)}}" method="get"> {{ csrf_field() }}<button class="btn btn-info"> {{ $data->destination }}</button></form></td>
                         <td style="text-align: center;">{{ $data->updated_at }}</td>
                         <td>
-                          <form action="{{ '/admin/deletebus/' . $data->id }}" method="post">
+                          <form action="{{url ('/admin/updatebus/' . $data->id) }}" method ="post">
                             {{ csrf_field() }}
-                            {{ method_field('UPDATE') }}
-                            <input type="submit" name="submit" value="Update" class="btn btn-success" />
+                            <button type="submit" name="submit" class="btn btn-success">Update</button>
                           </form>
                           <form action="{{ '/admin/deletebus/' . $data->id }}" method="post">
                             {{ csrf_field() }}
@@ -62,7 +62,7 @@
         <div class="panel-footer">
           <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
           <span class="pull-right">
-            <a href="{{ url('admin/add-bus') }}" data-toggle="tooltip" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add Bus</a>
+            <a href="{{ url('admin/addrouterbus') }}" data-toggle="tooltip" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add Bus</a>
           </span>
         </div>
       </div>

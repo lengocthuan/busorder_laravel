@@ -29,7 +29,9 @@ class BusController extends Controller
      */
     public function create()
     {
-        //
+        $location = Location::orderBy('id', 'DESC')->get()->first();
+        return view('users/admins/admin_add_bus',compact('location'));
+        
     }
 
     /**
@@ -40,7 +42,24 @@ class BusController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(request(), [
+            'name' => 'required|max:15|unique:bus_routers,name',
+        ],
+        [
+            'name.required' => 'Please input : starting_point - destination',
+        ]);
 
+        $add = new BusRouter;
+
+        $add->name = $request->name;
+        $add->description = $request->description;
+        $add->starting_point = $request->starting_point;
+        $add->destination = $request->destination;
+        $add->save();
+
+        session()->flash('alert-success', 'A router bus has been successfully added to our system.');
+
+        return redirect()->action('BusController@create');
     }
 
     /**
@@ -74,9 +93,24 @@ class BusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function showUpdate($id)
+    {
+        $edit = BusRouter::findOrFail($id);
+        $location = Location::orderBy('id', 'DESC')->get()->first();
+        return view('users/admins/admin_update_buslist', compact('edit', 'location'));
+    }
+
     public function update(Request $request, $id)
     {
-        //
+        $edit = BusRouter::findOrFail($id); 
+        $edit->touch();
+        $edit->update(array(
+                    'name'=>$request->name,
+                    'description'=>$request->descript,
+                    'starting_point'=>$request->starting,
+                    'destination'=>$request->destination
+        ));
+       return redirect()->action('BusController@index')->with('success','Bus Router has updated successfully');
     }
 
     /**
@@ -97,7 +131,7 @@ class BusController extends Controller
             ->join('detail_order_bus_infomation', 'detail_order_bus_infomation.bus_information_id', '=', 'bus_informations.id')
             ->where('bus_routers.id', '=', $id)
             ->get(['bus_routers.id'])->count();
-        //join 3 table and 
+        //join 3 table and count id has bus infor ordered from detail order
         if ($request->method() == "DELETE" && $busy == 0) {
             DB::table('bus_routers')->where('id', $id)->delete();
             Session::flash('msg', 'Selected Bus has been deleted successfully');

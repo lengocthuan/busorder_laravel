@@ -19,6 +19,8 @@
 		                		<strong>Notification</strong> {{ session() -> get('alert-danger') }}
 		                	</div>
 		                </div>
+		        @elseif(session()->has('error'))
+                        <p class="alert alert-info">{{ session()->get('error') }}</p>
 				@endif
 				<form method="post" action="/admin/login">
 					@include('errors')
