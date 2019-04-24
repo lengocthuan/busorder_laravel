@@ -4,7 +4,7 @@
   <div class="row">
     
     <div class="col-md-5 toppad pull-right col-md-offset-3">
-      <a href="{{ url('users/customers/edit-profile-form') }}">Edit Profile</a>
+      <a href="{{ url('/updateinfo/'. Auth::user()->id) }}">Edit Profile</a>
       <br>
       <p class="text-info">Today is: {{ date('d-m-Y H:i:s', time()) }}</p>
     </div>
@@ -19,7 +19,12 @@
         <div class="panel-body">
         <div class="row">
           <div class="col-md-3 col-lg-3" align="center">
-              <img alt="User Pic" src="http://lorempixel.com/g/800/600/transport/" class="img-circle img-responsive">
+              <img alt="User Pic" src="{{ url('images/admin.png') }}" class="img-circle img-responsive">
+            {{-- @if (is_null($imgs))
+            <img  src="http://lorempixel.com/100/100" class="avatar img-circle" alt="avatar" class="img-circle img-responsive">
+            @else
+            <img src="{{ url('upload/'.$imgs->description) }}" class="img-circle" alt="Cinque Terre" width="100" height="100"> --}}
+            {{-- @endif --}}
           </div>
             <div class="col-md-12 col-lg-12"> 
               <table class="table table-user-information">

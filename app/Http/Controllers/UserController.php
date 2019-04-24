@@ -8,6 +8,9 @@ use App\Image;
 use Session;
 use Auth;
 use DB;
+use App\Ticket;
+use App\BusInformation;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -18,18 +21,14 @@ class UserController extends Controller
      */
     public function index($id)
     {
-        //create join two table;
-        // $roles = DB::table('users')
-        //     ->join('role_users', 'role_users.user_id', '=', 'users.id')
-        //     ->where('users.email', '=', $email)
-        //     ->get();
-        //dd($roles)
-        $user = User::find($id);
-        $imgs = DB::table('users')
-                            ->join('images', 'images.user_id', '=', 'users.id')
-                            ->where('images.user_id', '=', $user)
-                            ->get('images.description');
+        $user = User::findOrFail($id);
+        $imgs = Image::where('user_id', $id )->get()->last();
 
+        //join db check description and use isEmpty() check data when it return to []
+        // $img1s = DB::table('users')
+        //                     ->join('images', 'images.user_id', '=', 'users.id')
+        //                     ->where('images.user_id', '=', $user)
+        //                     ->get('images.description');
         // dd($imgs);
         // if($imgs -> isEmpty()) {
         //     echo 'trong';
@@ -39,7 +38,7 @@ class UserController extends Controller
         //     return
         // }
 
-        return view('edit_profile',compact('user','imgs'));
+        return view('edit_profile',compact('imgs', 'user'));
     }
 
     /**
@@ -96,17 +95,42 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $imgs = Image::get();
+        $user = User::findOrFail($id);
+        $imgs = DB::table('users')
+                            ->join('images', 'images.user_id', '=', 'users.id')
+                            ->where('images.user_id', '=', $user)
+                            ->get('images.description');
+        if($imgs -> isEmpty()) {
+            $imgs = new Image;
+            $imgs->name =  $request->avatar;
+            $imgs->bus_information_id =  $request->bus_id;
+            $imgs->ticket_id =  $request->tick_id;
+            $imgs->user_id =  $id;
+
+            if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move('upload', $name);
+            $imgs->description = $name;
+            
+        }
+        // $imgs->save();
+
+            // $imageName = time().'_'.request()->image->getClientOriginalExtension();
+            // request()->image->move(public_path("images/user/"), $imageName);
+        }
+        $imgs->save();
         
-        $user = User::get();
-        $user->touch();
-        $user->update(array(
-                    'fname'=>$request->firstName,
-                    'lname'=>$request->lastName,
-                    'numphone'=>$request->numPhone,
-                    'birthday'=>$request->birthDay
-        ));
-       return redirect()->action('UserController@index')->with('success','You have successfully changed your account information');
+        // $user = User::get();
+        // $user->touch();
+        //$user = User::find($id);
+        $user->firstName=$request->fname;
+        $user->lastName=$request->lname;
+        $user->numPhone=$request->numphone;
+        $user->birthDay=$request->birthday;
+        $user->save();
+
+       return redirect()->back();
     }
 
     /**
@@ -118,5 +142,31 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function seatReservation()
+    {
+        $bus = BusInformation::get();
+        
+        return view('seat_reservation');
+    }
+
+    public function timeMoving($id)
+    {
+        $time = Ticket::find($id);
+        
+        //dd($time);
+       $start = Carbon::parse($time->time_start);
+        $end = Carbon::parse($time->time_end);
+        $hours = $end->diffInHours($start);
+        $mins = $end->diffInRealMinutes($start);
+        $secs = $end->diffInRealSeconds($start);
+
+        $minsreal = $mins - $hours*60;
+
+
+        //return $hours."hours". $minsreal."minutes";
+        //var_dump($time->time_start) ;
+        return view('seat_reservation',compact('hours', 'minreal'));
     }
 }

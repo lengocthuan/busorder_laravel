@@ -23,7 +23,7 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Username</label>
-                                <input type="text" class="form-control border" placeholder=" " name="username" id="recipient-rname" required="">
+                                <input type="text" class="form-control border" placeholder=" " name="username" id="rname" required="">
                             </div>
                             <div class="form-group">
                                 <label for="recipient-email" class="col-form-label">Email</label>
@@ -63,10 +63,23 @@
                         $.get('unique/' + email, function(data) {
                             if (data == "1" )
                             {
-                                alert('email has exist in our system, please try again with another email or you can press "Forget password"');
+                                alert('email has exist in our system, please try again!');
                             }
                         });
                     });
                 });
+                $( document ).ready(function() {
+                    $('#rname').blur(function()
+                    {
+                        var username = $(this).val();
+                        $.get('unique1/' + username, function(data1) {
+                            if (data1 == "1" )
+                            {
+                                alert('username has exist in our system, please try again!');
+                            }
+                        });
+                    });
+                });
+                
         </script>
 @endsection

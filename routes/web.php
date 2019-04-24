@@ -56,6 +56,14 @@ Route::get('check', 'RouterDropdownListController@test');
 Route::get('/updateinfo/{id}', 'UserController@index'); //show ra profile
 Route::post('/edited/{id}', 'UserController@update'); //update
 
+//seat reservation
+Route::get('seatbooking', 'UserController@seatReservation');
+Route::get('timemoving', 'UserController@timeMoving');
+Route::get('/noti', function () {
+    return view('notification');
+});
+
+
 // Admin Route
 Route::get('/admin/login', 'AdminController@adloginform'); //get
 Route::get('admin/logout', 'AdminController@destroy'); //logout
@@ -63,7 +71,7 @@ Route::post('/admin/login', 'AdminController@adminlogin');
 
 Route::group(['middleware' => 'login'], function () {
 	//login admin
-    Route::get('admin/dashboard', 'AdminController@index');
+    Route::get('admin/dashboard/', 'AdminController@index');
      //post
 
     // Route::get('admin/dashboard', 'AdminController@index'); //dashboard

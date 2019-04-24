@@ -111,4 +111,9 @@ class RegistrationController extends Controller
         $check = User::where('email', $email)->get();
         echo $check->count();
     }
+    public function unique1($username)
+    {
+        $check = User::where('username', $username)->get();
+        echo $check->count();
+    }
 }

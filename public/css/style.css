@@ -1442,19 +1442,7 @@ ul {
     margin-left: 10px;
 }
 
-.container-custom{
+.container-custom {
     padding-top: 80px;
     padding-bottom: 106px;
 }
-
-.showme{ 
-   display: none;
- }
-
-.showhim:hover .showme{
-   display : block;
- }
-
-.showhim:hover .ok{
-   display : none;
- }

@@ -11,7 +11,9 @@
     <!-- Bootstrap -->
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="{{asset('css/seat.css')}}" />
     <link type="text/css" rel="stylesheet" href="{{asset('css/style.css')}}" />
+    
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -25,6 +27,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/jquery.min.js"></script>
+    <script src="js/seat.js"></script>
     <script type="text/javascript" src="js/modernizr.custom.86080.js"></script>
 </head>
     <body>
@@ -37,6 +40,7 @@
             @yield('tc')
             @yield('ddlist')
             @yield('login-adform')
+            @yield('seatreservation')
         @include('front_footer')
     </body>
 </html>
