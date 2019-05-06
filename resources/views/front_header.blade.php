@@ -1,8 +1,8 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Bus Order</a>
-            <form class="example" action="action_page.php">
+            <a class="navbar-brand" href="{{ url('/') }}">Bus Order</a>
+            <form class="example" action="{{ url('/noti') }}">
                 <input type="text" placeholder="Search.." name="search">
                 <button class="submit" type="submit"><i class="fa fa-search"></i></button>
             </form>
@@ -20,10 +20,10 @@
                         <a class="nav-link" href="{{ url('/aboutus') }}">About us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                        <a class="nav-link" href="{{ url('/seatbooking') }}">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Feedback and Rating</a>
+                        <a class="nav-link" href="{{ url('/noti') }}">Feedback and Rating</a>
                     </li>
                     @if( Auth::check() )
                         <li class="menu-item has-sub-menu">

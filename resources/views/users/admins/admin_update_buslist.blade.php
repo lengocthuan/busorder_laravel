@@ -15,7 +15,7 @@
         <div class="panel-body">
         <div class="row">
           @if ( Session::has('msg') )
-            <p class="alert alert-info">{{ Session::get('msg') }}</p>
+            <p class="alert alert-success">{{ Session::get('msg') }}</p>
           @endif
           
           <div class="col-md-12 col-lg-12">

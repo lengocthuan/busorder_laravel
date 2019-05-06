@@ -37,6 +37,7 @@
                                 <label for="password2" class="col-form-label">Confirm Password</label>
                                 <input type="password" class="form-control border" placeholder=" " name="password_confirmation" id="password2" required="">
                             </div>
+                            <input type="hidden" name="role_id" id="" value="0">
                             <div class="sub-w3l">
                                 <div class="sub-agile">
                                     <input type="checkbox" id="brand2" required="">
@@ -67,13 +68,12 @@
                             }
                         });
                     });
-                });
-                $( document ).ready(function() {
+            
                     $('#rname').blur(function()
                     {
                         var username = $(this).val();
                         $.get('unique1/' + username, function(data1) {
-                            if (data1 == "1" )
+                            if (data1 >= "1" )
                             {
                                 alert('username has exist in our system, please try again!');
                             }

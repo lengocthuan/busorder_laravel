@@ -68,6 +68,13 @@ class BusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function show($id)
+    {
+        //show detail a record of bus_router;
+        $bus = BusRouter::find($id);
+        return view('users.admins.admin_bus_list_detail', compact('bus'));
+    }
+
     public function showDetailLocation($id)
     {
         // echo $id;
@@ -143,7 +150,7 @@ class BusController extends Controller
 
     public function showLocation()
     {
-        $locs = Location::get();
+        $locs = Location::latest('updated_at')->paginate(20);
         return view('users/admins/admin_bus_location', compact('locs'));
     }
 }

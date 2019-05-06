@@ -30,11 +30,11 @@ $(function () {
             };
 
             //case I: Show from starting
-            //init();
+            init();
 
             //Case II: If already booked
-            var bookedSeats = [5, 10, 25];
-            init(bookedSeats);
+            // var bookedSeats = [5, 10, 25];
+            // init(bookedSeats);
 
 
             $('.' + settings.seatCss).click(function () {
@@ -63,3 +63,4 @@ $(function () {
                 alert(str.join(','));
             })
         });
+//doan nay dung de chon ghe chon cho ngoi;

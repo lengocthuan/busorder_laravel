@@ -18,7 +18,7 @@ class CreateDetailOrderBusInfomationTable extends Migration
             $table->bigInteger('order_id')->unsigned();
             $table->bigInteger('bus_information_id')->unsigned();
             $table->string('name')->nullable();
-            $table->string('description')->nullable();            
+            $table->string('description')->nullable();
             $table->string('seat');
             $table->decimal('price', 8, 2);
             $table->timestamps();

@@ -42,6 +42,7 @@ class RegistrationController extends Controller
             'password' => 'required|confirmed|min:6',
         ],
         [
+            'username.unique' => 'The usersname already exists in the system.',
             'email.unique' => 'The email already exists in the system.',
         ]);
 
@@ -49,6 +50,7 @@ class RegistrationController extends Controller
         $user->username = $request->username;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->role_id =  $request->role_id;
         $user->save();
 
         // auth()->login($user);

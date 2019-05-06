@@ -34,24 +34,30 @@
                         <td>{{ $data->name }}</td>
                         <td>{{ $data->description }}</td>
                         <td>
+                          <form action="{{url ('/admin/locationdetail/' . $data->id) }}" method ="get">
+                            {{ csrf_field() }}
+                            <button type="submit" name="submit" class="btn btn-success">Update</button>
+                          </form>
                           <form action="{{ 'admin/deletelocs/' . $data->id }}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <input type="submit" name="submit" value="Delete" class="btn btn-sm btn-danger" />
+                            <input type="submit" name="submit" value="Delete" class="btn btn-danger" />
                           </form>
                         </td>
                       </tr>
                     @endforeach
                   @endif 
+                  {{ $locs->links() }}
                 </tbody>
               </table>
+              {{ $locs->links() }}
             </div>
           </div>
         </div>
         <div class="panel-footer">
-          <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+          <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
           <span class="pull-right">
-            <a href="{{ url('admin/add-bus') }}" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-plus"></i> Add Locations</a>
+            <a href="{{ url('admin/addlocations') }}" data-toggle="tooltip" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add Locations</a>
           </span>
         </div>
       </div>

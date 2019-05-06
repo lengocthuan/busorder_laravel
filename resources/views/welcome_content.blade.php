@@ -18,7 +18,7 @@
                         <div class="form-header">
                             <h1>Make your reservation</h1>
                         </div>
-                        <form action="/" method="get">
+                        <form action="{{ url('/seatbooking') }}" method="get">
                             {{ csrf_field() }}
                             @include('errors')
                             <div class="row">

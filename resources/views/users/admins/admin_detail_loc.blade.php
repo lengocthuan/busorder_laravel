@@ -32,6 +32,10 @@
                         <td>{{ $detail->name }}</td>
                         <td>{{ $detail->description }}</td>
                         <td>
+                          <form action="{{url ('/admin/locationdetail/' . $detail->id) }}" method ="get">
+                            {{ csrf_field() }}
+                            <button type="submit" name="submit" class="btn btn-success">Update</button>
+                          </form>
                           <form action="{{ '/admin/deletelocs/' . $detail->id }}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
@@ -47,8 +51,8 @@
         <div class="panel-footer">
           <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
           <span class="pull-right">
-            <a href="{{ url('admin/routerlist') }}" data-toggle="tooltip" type="button" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
-            <a href="{{ url('admin/add-bus') }}" data-toggle="tooltip" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add Locations</a>
+            <a href="{{ url('admin/locslist') }}" data-toggle="tooltip" type="button" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+            <a href="{{ url('admin/addlocations') }}" data-toggle="tooltip" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add Locations</a>
           </span>
         </div>
       </div>

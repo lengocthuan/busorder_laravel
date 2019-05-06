@@ -31,7 +31,7 @@
                     <th>Update_at</th>
                     <th>Action</th>
                   </tr>
-                  @if ( count($bus))
+                  @if (count($bus))
                     @foreach ( $bus as $data )
                       <tr>
                         <td>{{ $data->id }}</td>

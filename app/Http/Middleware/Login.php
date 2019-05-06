@@ -17,11 +17,16 @@ class Login
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->role_id == "1") {
-            return $next($request);
+        if(Auth::check()){
+            if (Auth::user()->role_id == "1") {
+                return $next($request);
+            }
+            else {
+                return redirect('/admin/login')->with('error', 'You do not have access to the administrator`s address with this account');
+            }
         }
         else {
-            return redirect('/admin/login')->with('error', 'You do not have access to the administrator`s address with this account');
+            return redirect('/admin/login');
         }
     }
 }

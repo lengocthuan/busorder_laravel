@@ -16,7 +16,7 @@
             <img src="{{ url('upload/'.$imgs->description) }}" class="img-circle" alt="Cinque Terre" width="100" height="100">
             @endif
             <h6>Upload a different photo...</h6>
-            <input type="file" class="form-control" accept=".png, .jpg, .jpeg" name="image">
+            <input type="file" class="form-control" accept=".png, .jpg, .jpeg" name="image" required="">
             <input type="hidden" name="avatar" id="" value="avatar">
             <input type="hidden" name="bus_id" id="" value="1">
             <input type="hidden" name="tick_id" id="" value="1">
@@ -37,25 +37,25 @@
             <div class="form-group">
               <label class="col-lg-3 control-label">First name:</label>
               <div class="col-lg-8">
-                <input class="form-control" type="text" value="" required="" name="fname">
+                <input class="form-control" type="text" value="{{ $user->firstName }}" required="" name="fname">
               </div>
             </div>
             <div class="form-group">
               <label class="col-lg-3 control-label">Last name:</label>
               <div class="col-lg-8">
-                <input class="form-control" type="text" value="" required="" name="lname">
+                <input class="form-control" type="text" value="{{ $user->lastName }}" required="" name="lname">
               </div>
             </div>
             <div class="form-group">
               <label class="col-lg-3 control-label">Numberphone:</label>
               <div class="col-lg-8">
-                <input class="form-control" required="" type="tel" name="numphone" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required placeholder="Format: 84-012-345-6789">
+                <input class="form-control" value= "{{ $user->numPhone }}" required="" type="tel" name="numphone" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required placeholder="Format: 84-012-345-6789">
               </div>
             </div>
             <div class="form-group">
               <label class="col-lg-3 control-label">Birthday:</label>
               <div class="col-lg-8">
-                <input class="form-control"  type="date" name="birthday" required>
+                <input class="form-control" value="{{ $user->birthDay }}" type="date" name="birthday" required>
               </div>
             </div>
             <div class="form-group">
